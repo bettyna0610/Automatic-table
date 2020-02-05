@@ -1,7 +1,7 @@
 import React from 'react';
 import {BootstrapTable, 
     TableHeaderColumn} from 'react-bootstrap-table';
-
+/*
 const Table = (props) => {
 
     
@@ -19,7 +19,35 @@ const Table = (props) => {
       </tr>
       )
     })
-}
+}*/
+
+class Table extends React.Component {
+
+
+    render() {
+
+        const values = Object.values(this.props.table);
+
+      return (
+        <div>
+          <BootstrapTable data={values}>
+            <TableHeaderColumn isKey dataField='id'>
+              ID
+            </TableHeaderColumn>
+            <TableHeaderColumn dataField='date'>
+              Date
+            </TableHeaderColumn>
+            <TableHeaderColumn dataField='amount'>
+            Amount
+            </TableHeaderColumn>
+            <TableHeaderColumn dataField='bid'>
+            Bid
+            </TableHeaderColumn>
+          </BootstrapTable>
+        </div>
+      );
+    }
+  }
        
 
 export default Table;
