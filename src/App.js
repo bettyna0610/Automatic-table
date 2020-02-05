@@ -2,59 +2,47 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 //import Table from './table.js';
-import {offers} from './data'
+import {offers} from './data';
+import Table from './table.js';
+
 
 class App extends React.Component {
-constructor(props) {
-  super(props); 
-  this.state={
-    table:offers
-  }
-  console.log(this.state.table)
+ constructor(props) {
+   super(props);
+   this.state = {
+     table:offers
+   }
+   //alert( this.state.table );
+   //alert( "TA = " + this.state.table );
+   //alert( "TA2 = " + Object.keys( this.state.table ).length );
+   //this.tableAdd();
+   window.setTimeout( this.tableAdd.bind( this ), 5000 );
+ } 
+
+ tableAdd = () => {
+  //alert( "TA = " + this.state.table );
+  //alert( "TA2 = " + Object.keys( this.state.table ).length );
+  let l = Object.keys( this.state.table ).length;
+  let dd2 = new Date();
+  offers[ l ] = {"id":l, "date": new Date(dd2.setMinutes(dd2.getMinutes() + l*10)), "amount": Math.random()*10,
+    "bid": 9.5 + Math.random()};
+  this.setState( { table: offers } );
+  window.setTimeout( this.tableAdd.bind( this ), 5000 );
+
+ }
+
+render() {
+  return (
+    <div>
+      <table>
+        <tbody>
+      <Table table={this.state.table}/>
+      </tbody>
+      </table>
+      
+    </div>
+  )
 }
 
-
-
- 
-renderTable = () => {
-  const table = this.state.table
-  console.log(table[0].date)
-  return Object.keys(table).map((obj,i) => 
-    { const { id, date, amount, bid } = table[obj]
-    
-    return (
-      <tr key={id}>
-      <td>{id}</td>
-       <td>{date.toString()}</td>
-       <td>{amount}</td>
-    <td>{bid}</td>
-    </tr>
-    )
-  })
-  
 }
-
-
-     
-    
-  render() {
-   
-
-
-    return (
-      <div>
-         
-         
-        <div>
-                 <table>
-                   <tbody>
-                  {this.renderTable()}
-                  </tbody>
-                  </table>
-                  </div>
-              
-      </div>)
-}
-}
-
 export default App;
