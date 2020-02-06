@@ -1,60 +1,56 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-//import Table from './table.js';
-import {offers} from './data'
+
+import { offers } from './Data/data';
+import Table from './Components/table.js';
+
 
 class App extends React.Component {
-constructor(props) {
-  super(props); 
-  this.state={
-    table:offers
+  // Getting data from offers object to the initial state. 
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      table: offers
+    }
   }
-  console.log(this.state.table)
-}
+// After the table was loaded, the setInterval function calls tabbleAdd adding new rows in every 5 seconds. 
+  componentDidMount = () => {
+    setInterval(() => {
+      this.tableAdd();
+    }, 5000);
+  }
 
+  tableAdd = () => {
+    // I created offersCopy not to mutate the original data.
+    // The newRow is the new element of the object as the last element of the initial table is length-1.I used toDateString to delete timezone from the date object.
+    // I reduced amount to 2 decimals, and rounded bid to have more transperent data.
+    // It also updates the state.
+    const newRow = Object.keys(this.state.table).length;
+    const dd2 = new Date();
+    const offersCopy = offers;
 
+    offersCopy[newRow] = {
+      "id": newRow, "date": new Date(dd2.setMinutes(dd2.getMinutes() + newRow * 10)).toDateString(), "amount": (Math.random() * 10).toFixed(2),
+      "bid": 9.5 + Math.round(Math.random())
+    };
+    this.setState({ table: offersCopy });
+  }
 
- 
-renderTable = () => {
-  const table = this.state.table
-  console.log(table[0].date)
-  return Object.keys(table).map((obj,i) => 
-    { const { id, date, amount, bid } = table[obj]
-    
-    return (
-      <tr key={id}>
-      <td>{id}</td>
-       <td>{date.toString()}</td>
-       <td>{amount}</td>
-    <td>{bid}</td>
-    </tr>
-    )
-  })
-  
-}
-
-
-     
-    
   render() {
-   
-
-
+    console.log(offers)
     return (
+      //The table component gets the offers data from the state.
       <div>
-         
-         
-        <div>
-                 <table>
-                   <tbody>
-                  {this.renderTable()}
-                  </tbody>
-                  </table>
-                  </div>
-              
-      </div>)
-}
-}
+        <table>
+          <tbody>
+            <Table table={this.state.table} />
+          </tbody>
+        </table>
 
+      </div>
+    )
+  }
+
+}
 export default App;
