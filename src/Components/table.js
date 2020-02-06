@@ -1,6 +1,7 @@
 import React from 'react';
 import {BootstrapTable, 
     TableHeaderColumn} from 'react-bootstrap-table';
+
 /*
 const Table = (props) => {
 
@@ -21,33 +22,33 @@ const Table = (props) => {
     })
 }*/
 
-class Table extends React.Component {
+const Table = (props) => {
 
 
-    render() {
+    
 
-        const values = Object.values(this.props.table);
+        const values = Object.values(props.table);
 
       return (
-        <div>
-          <BootstrapTable data={values}>
-            <TableHeaderColumn isKey dataField='id'>
+        <div className="table">
+          <BootstrapTable   striped bordered hover  data={values}  >
+            <TableHeaderColumn dataAlign="center" width={'50px'}isKey dataField='id'>
               ID
             </TableHeaderColumn>
-            <TableHeaderColumn dataField='date'>
+            <TableHeaderColumn dataAlign="center" width={'140px'} dataField='date'>
               Date
             </TableHeaderColumn>
-            <TableHeaderColumn dataField='amount'>
+            <TableHeaderColumn dataAlign="center" width={'95px'} dataField='amount'>
             Amount
             </TableHeaderColumn>
-            <TableHeaderColumn dataField='bid'>
+            <TableHeaderColumn width={'55px'} dataAlign="center" dataField='bid'>
             Bid
             </TableHeaderColumn>
           </BootstrapTable>
         </div>
       );
     }
-  }
+  
        
 
 export default Table;

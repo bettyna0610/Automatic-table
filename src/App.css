@@ -36,3 +36,14 @@
     transform: rotate(360deg);
   }
 }
+body {
+  margin-top: 50px;
+  margin-left:300px;
+  margin-right:300px;
+}
+ .table {width:500px} 
+.my-custom-class {
+  background-color:blue;
+}
+
+

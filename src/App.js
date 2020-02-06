@@ -1,9 +1,9 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-//import Table from './table.js';
-import {offers} from './data';
-import Table from './table.js';
+
+import {offers} from './Components/data';
+import Table from './Components/table.js';
 
 
 class App extends React.Component {
@@ -24,8 +24,8 @@ class App extends React.Component {
   //alert( "TA2 = " + Object.keys( this.state.table ).length );
   let l = Object.keys( this.state.table ).length;
   let dd2 = new Date();
-  offers[ l ] = {"id":l, "date": new Date(dd2.setMinutes(dd2.getMinutes() + l*10)), "amount": Math.random()*10,
-    "bid": 9.5 + Math.random()};
+  offers[ l ] = {"id":l, "date": new Date(dd2.setMinutes(dd2.getMinutes() + l*10)).toDateString(), "amount": (Math.random()*10).toFixed(2),
+    "bid": 9.5 + Math.round(Math.random())};
   this.setState( { table: offers } );
   window.setTimeout( this.tableAdd.bind( this ), 5000 );
 
